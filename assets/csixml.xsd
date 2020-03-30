@@ -1,0 +1,71 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="csixml" type="csixmlType"/>
+    <xsd:complexType name="csixmlType">
+        <xsd:sequence>
+            <xsd:element name="head" type="headType"/>
+            <xsd:element name="data" type="dataType"/>
+        </xsd:sequence>
+        <xsd:attribute name="version" fixed="1.0"/>
+    </xsd:complexType>
+    <xsd:complexType name="headType">
+        <xsd:sequence>
+            <xsd:element name="environment" type="environmentType"/>
+            <xsd:element name="fields" type="fieldsType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="environmentType">
+        <xsd:sequence>
+            <xsd:element name="station-name" type="xsd:string"/>
+            <xsd:element name="table-name" type="xsd:string"/>
+            <xsd:element name="model" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="serial-no" type="xsd:unsignedInt" minOccurs="0"/>
+            <xsd:element name="os-version" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="dld-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="dld-sig" type="xsd:unsignedShort" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="fieldsType">
+        <xsd:sequence>
+            <xsd:element name="field" type="fieldType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="fieldDataType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="xsd:string"/>
+            <xsd:enumeration value="xsd:long"/>
+            <xsd:enumeration value="xsd:unsignedLong"/>
+            <xsd:enumeration value="xsd:int"/>
+            <xsd:enumeration value="xsd:unsignedInt"/>
+            <xsd:enumeration value="xsd:short"/>
+            <xsd:enumeration value="xsd:unsignedShort"/>
+            <xsd:enumeration value="xsd:byte"/>
+            <xsd:enumeration value="xsd:unsignedByte"/>
+            <xsd:enumeration value="xsd:float"/>
+            <xsd:enumeration value="xsd:double"/>
+            <xsd:enumeration value="xsd:boolean"/>
+            <xsd:enumeration value="xsd:dateTime"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="fieldType">
+        <xsd:attribute name="name" use="required" type="xsd:string"/>
+        <xsd:attribute name="type" use="required" type="fieldDataType"/>
+        <xsd:attribute name="units" type="xsd:string"/>
+        <xsd:attribute name="process" type="xsd:string"/>
+        <xsd:attribute name="string-len" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="dataType">
+        <xsd:sequence>
+            <xsd:element name="r" type="recordType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="recordType">
+        <xsd:sequence>
+            <xsd:any processContents="lax" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="no" type="xsd:unsignedInt"/>
+        <xsd:attribute name="time" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="valueType">
+        <xsd:attribute name="n" type="xsd:string"/>
+    </xsd:complexType>
+</xsd:schema>

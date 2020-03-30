@@ -1,0 +1,33 @@
+{
+    "name":        "thyyppa/toxx",
+    "description": "A package for reading Campbell Scientific datalogger table file formats.",
+    "type":        "library",
+    "license":     "MIT",
+    "authors":     [
+        {
+            "name":  "Travis Hyyppä",
+            "email": "travishyyppa@gmail.com"
+        }
+    ],
+    "require":     {
+        "php":                    "^7.2",
+        "ext-xmlreader":          "^7.2",
+        "symfony/polyfill-iconv": "^1.15",
+        "tightenco/collect":      "^7.3",
+        "nesbot/carbon":          "^2.32",
+        "jawira/case-converter":  "^3.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload":    {
+        "psr-4": {
+            "Hyyppa\\Toxx\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "./tests/"
+        }
+    }
+}
