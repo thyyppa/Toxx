@@ -52,6 +52,7 @@ trait ReadingMutations
 
         $field = $this->handleSuffix($field);
         $field = $this->mutateField($field);
+        $field = $this->aliasField($field);
 
         return $field;
     }
@@ -169,6 +170,22 @@ trait ReadingMutations
         }
 
         return str_ireplace('_'.$suffix, '', $field);
+    }
+
+
+    /**
+     * @param $field
+     *
+     * @return string
+     */
+    protected function aliasField($field) : string
+    {
+        $aliases = $this->settings()->alias;
+        if( ! array_key_exists($field, $aliases) ) {
+            return $field;
+        }
+
+        return $aliases[$field];
     }
 
 

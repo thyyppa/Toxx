@@ -1,6 +1,7 @@
 <?php namespace Tests;
 
 use Hyyppa\Toxx\Exceptions\SettingsException;
+use Hyyppa\Toxx\Toxx;
 use Hyyppa\Toxx\Utils\Settings;
 
 class SettingsTest extends BaseTest
@@ -380,6 +381,28 @@ class SettingsTest extends BaseTest
                }
              }'
         );
+    }
+
+
+    /**
+     *
+     */
+    public function testAlias() : void
+    {
+        $dat_file = $this->data('DemoOutputToa5.dat');
+        $settings = Settings::make()
+                            ->alias([
+                                'battery_voltage' => 'aaa',
+                                'panel_temp'      => 'bbb',
+                            ]);
+
+        $readings = Toxx::load($dat_file, $settings);
+        $first    = $readings->first()->array();
+
+        self::assertArrayHasKey('aaa', $first);
+        self::assertArrayHasKey('bbb', $first);
+        self::assertArrayNotHasKey('battery_voltage', $first);
+        self::assertArrayNotHasKey('panel_temp', $first);
     }
 
 
