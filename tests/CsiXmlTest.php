@@ -1,20 +1,20 @@
 <?php namespace Tests;
 
 use Hyyppa\Toxx\Contracts\DataFileInterface;
-use Hyyppa\Toxx\Format\Toa5\Toa5;
+use Hyyppa\Toxx\Format\CsiXml\CsiXml;
 
-class Toa5Test extends BaseDatafileTest
+class CsiXmlTest extends BaseDatafileTest
 {
 
     /**
      * @var string
      */
-    protected $filename = 'DemoOutputToa5.dat';
+    protected $filename = 'DemoOutputXML.xml';
 
     /**
      * @var DataFileInterface
      */
-    protected $class = Toa5::class;
+    protected $class = CsiXml::class;
 
 
     /**
@@ -36,14 +36,14 @@ class Toa5Test extends BaseDatafileTest
         $dat = $this->loadDataFile();
 
         $this->assertEquals([
-            'format'        => 'TOA5',
+            'format'        => 'CSIXML',
             'station'       => '__STATION_NAME__',
             'datalogger'    => '__DATALOGGER_MODEL__',
-            'serial_number' => '__SERIAL_NUMBER__',
+            'serial_number' => '12345',
             'os_version'    => '__OS_VERSION__',
             'dld_name'      => '__DLD_NAME__',
-            'dld_signature' => '__DLD_SIGNATURE__',
-            'table'         => '__TABLE_NAME_TOA5__',
+            'dld_signature' => '54321',
+            'table'         => '__TABLE_NAME_CSIXML__',
         ], $dat->info());
 
         $this->assertEquals([
@@ -63,8 +63,8 @@ class Toa5Test extends BaseDatafileTest
         ], $dat->units());
 
         $this->assertEquals([
-            0 => '',
-            1 => '',
+            0 => 'Smp',
+            1 => 'Smp',
             2 => 'Smp',
             3 => 'Smp',
             4 => 'Min',

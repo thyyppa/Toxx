@@ -1,20 +1,29 @@
 <?php namespace Tests;
 
 use Hyyppa\Toxx\Contracts\DataFileInterface;
-use Hyyppa\Toxx\Format\Toa5\Toa5;
+use Hyyppa\Toxx\Format\Ascii\Ascii;
 
-class Toa5Test extends BaseDatafileTest
+class AsciiTest extends BaseDatafileTest
 {
 
     /**
      * @var string
      */
-    protected $filename = 'DemoOutputToa5.dat';
+    protected $filename = 'DemoOutputAscii.dat';
 
     /**
      * @var DataFileInterface
      */
-    protected $class = Toa5::class;
+    protected $class = Ascii::class;
+
+    /**
+     * @var array
+     */
+    protected $fields = [
+        2 => 'panel_temp',
+        3 => 'battery_voltage',
+        4 => 'battery_voltage_Min',
+    ];
 
 
     /**
@@ -36,39 +45,12 @@ class Toa5Test extends BaseDatafileTest
         $dat = $this->loadDataFile();
 
         $this->assertEquals([
-            'format'        => 'TOA5',
-            'station'       => '__STATION_NAME__',
-            'datalogger'    => '__DATALOGGER_MODEL__',
-            'serial_number' => '__SERIAL_NUMBER__',
-            'os_version'    => '__OS_VERSION__',
-            'dld_name'      => '__DLD_NAME__',
-            'dld_signature' => '__DLD_SIGNATURE__',
-            'table'         => '__TABLE_NAME_TOA5__',
-        ], $dat->info());
-
-        $this->assertEquals([
             0 => 'TIMESTAMP',
             1 => 'RECORD',
             2 => 'panel_temp',
             3 => 'battery_voltage',
             4 => 'battery_voltage_Min',
         ], $dat->fields());
-
-        $this->assertEquals([
-            0 => 'TS',
-            1 => 'RN',
-            2 => '°C',
-            3 => 'volts',
-            4 => 'volts',
-        ], $dat->units());
-
-        $this->assertEquals([
-            0 => '',
-            1 => '',
-            2 => 'Smp',
-            3 => 'Smp',
-            4 => 'Min',
-        ], $dat->processing());
     }
 
 
@@ -87,15 +69,6 @@ class Toa5Test extends BaseDatafileTest
     public function testBasicRecordCollection() : void
     {
         $this->_testBasicRecordCollection();
-    }
-
-
-    /**
-     *
-     */
-    public function testHumanUnits() : void
-    {
-        $this->_testHumanOutput();
     }
 
 
