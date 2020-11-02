@@ -2,6 +2,7 @@
 
 use Hyyppa\Toxx\Contracts\DataFileInterface;
 use Hyyppa\Toxx\Contracts\SettingsInterface;
+use Hyyppa\Toxx\Exceptions\MissingFieldsException;
 use Hyyppa\Toxx\Format\Ascii\Ascii;
 use Hyyppa\Toxx\Format\CsiXml\CsiXml;
 use Hyyppa\Toxx\Format\CSV\CSV;

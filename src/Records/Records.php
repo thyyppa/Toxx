@@ -1,5 +1,6 @@
 <?php namespace Hyyppa\Toxx\Records;
 
+use Hyyppa\Toxx\Contracts\JsonAndArrayOutput;
 use Hyyppa\Toxx\Contracts\Record\FrameInterface;
 use Hyyppa\Toxx\Contracts\Record\JsonableRecordInterface;
 use Hyyppa\Toxx\Contracts\Record\RecordCollectionInterface;
@@ -7,7 +8,7 @@ use Hyyppa\Toxx\Contracts\Record\RecordInterface;
 use Hyyppa\Toxx\Format\General\Collection;
 use Hyyppa\Toxx\Traits\JsonableRecordCollection;
 
-class Records extends Collection implements RecordCollectionInterface, JsonableRecordInterface
+class Records extends Collection implements RecordCollectionInterface, JsonableRecordInterface, JsonAndArrayOutput
 {
 
     use JsonableRecordCollection;
@@ -70,9 +71,9 @@ class Records extends Collection implements RecordCollectionInterface, JsonableR
 
 
     /**
-     * @return RecordCollectionInterface
+     * @return array
      */
-    public function arrayWithUnits() : RecordCollectionInterface
+    public function arrayWithUnits() : array
     {
         return $this->human();
     }
@@ -86,6 +87,17 @@ class Records extends Collection implements RecordCollectionInterface, JsonableR
         return $this->map(static function (RecordInterface $record) {
             return $record->array();
         })->toArray();
+    }
+
+
+    /**
+     * @return array
+     */
+    public function arrayWithHidden() : array
+    {
+        return $this->map(static function (Record $record) {
+            return $record->arrayWithHidden();
+        })->array();
     }
 
 }

@@ -132,7 +132,7 @@ class CsiXmlReader
         $reader->close();
         unset($reader);
 
-        return $count;
+        return $count + 1;
     }
 
 
@@ -172,13 +172,13 @@ class CsiXmlReader
         return $records->map(function ($record) {
             $attr = array_shift($record);
 
-            if ($attr[ 'no' ]) {
+            if (isset($attr[ 'no' ])) {
                 $record = array_merge([
                     'RECORD' => $attr[ 'no' ],
                 ], $record);
             }
 
-            if ($attr[ 'time' ]) {
+            if (isset($attr[ 'time' ])) {
                 $record = array_merge([
                     'TIMESTAMP' => $attr[ 'time' ],
                 ], $record);

@@ -45,16 +45,18 @@ abstract class BaseToa extends BaseDataFile
      */
     public function read(int $count = 1) : RecordCollectionInterface
     {
-        if ($this->currentLine() + $count > $this->totalLines()) {
-            $count = $this->totalLines() - $this->currentLine();
+        if (($this->currentLine() + $count) > $this->totalLines()) {
+            return $this->last($count);
         }
 
         $records = Records::withHeader($this->_header);
 
         for ($i = 0; $i < $count; $i++) {
-            $records->addRecord(
-                new ToaFrame($this->fgetcsv(), $this->_header)
-            );
+            if ($csv = $this->fgetcsv()) {
+                $records->addRecord(
+                    new ToaFrame($csv, $this->_header)
+                );
+            }
         }
 
         return $records;
@@ -121,7 +123,7 @@ abstract class BaseToa extends BaseDataFile
             $this->currentFrame() - $count
         );
 
-        $this->seekFrame($start_frame);
+        $this->seekFrame($start_frame - 1);
 
         if ($count === 1) {
             return $this->read()->first();
@@ -281,9 +283,9 @@ abstract class BaseToa extends BaseDataFile
 
 
     /**
-     * @return array
+     * @return array|null
      */
-    protected function fgetcsv() : array
+    protected function fgetcsv() : ?array
     {
         return $this->_file->fgetcsv();
     }

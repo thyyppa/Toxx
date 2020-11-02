@@ -66,6 +66,24 @@ abstract class BaseDataFile implements DataFileInterface
 
 
     /**
+     * @return array|null
+     */
+    public function units() : ?array
+    {
+        return $this->header()->units();
+    }
+
+
+    /**
+     * @return array|null
+     */
+    public function processing() : ?array
+    {
+        return $this->header()->processing();
+    }
+
+
+    /**
      * @param  string  $csv
      *
      * @return array

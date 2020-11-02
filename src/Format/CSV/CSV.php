@@ -35,7 +35,7 @@ class CSV extends BaseDataFile
 
 
     /**
-     * @param  array          $fields
+     * @param  array  $fields
      *
      * @return FileHeaderInterface
      */
@@ -58,8 +58,8 @@ class CSV extends BaseDataFile
      */
     public function read(int $count = 1) : RecordCollectionInterface
     {
-        if ($this->currentLine() + $count > $this->totalLines()) {
-            $count = $this->totalLines() - $this->currentLine();
+        if (($this->currentLine() + $count) > $this->totalLines()) {
+            return $this->last($count);
         }
 
         $records = Records::withHeader($this->_header);
@@ -132,10 +132,10 @@ class CSV extends BaseDataFile
     public function prev(int $count = 1)
     {
         $start = $this->keepWithinBounds(
-            $this->currentLine() - $count
+            $this->currentLine() - $count - 2
         );
 
-        $this->_file->seek($start - 1);
+        $this->_file->seek($start);
         $read = $this->read($count);
 
         return $count === 1 ? $read->first() : $read;

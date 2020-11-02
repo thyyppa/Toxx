@@ -63,7 +63,7 @@ class Field implements FieldInterface
      * See the loggernet manual under Appendix B, Table B-1 "Output Instruction Suffixes"
      * for more.
      *
-     * @see https://s.campbellsci.com/documents/us/manuals/loggernet.pdf
+     * @see https://s.campbellsci.com/documents/us/manuals/loggernet.pdf#page=478
      *
      * @var string
      */

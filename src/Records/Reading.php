@@ -128,7 +128,6 @@ class Reading implements ReadingInterface
 
     /**
      * @return string
-     * @throws CaseConverterException
      */
     public function field() : string
     {
@@ -173,11 +172,20 @@ class Reading implements ReadingInterface
 
 
     /**
+     * @return mixed
+     */
+    public function originalUnit()
+    {
+        return $this->_unit;
+    }
+
+
+    /**
      * @return string|null
      */
     public function unit() : ?string
     {
-        return $this->_unit;
+        return $this->unitMutation($this->_unit);
     }
 
 
@@ -192,7 +200,6 @@ class Reading implements ReadingInterface
 
     /**
      * @return array
-     * @throws CaseConverterException
      */
     public function info() : array
     {

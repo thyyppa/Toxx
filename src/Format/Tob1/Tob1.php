@@ -139,7 +139,7 @@ class Tob1 extends BaseDataFile
     public function prev(int $count = 1)
     {
         $start_frame = $this->keepWithinBounds(
-            $this->currentFrame() - $count
+            $this->currentFrame() - $count - 1
         );
 
         $this->seekFrame($start_frame);

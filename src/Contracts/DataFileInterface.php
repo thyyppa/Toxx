@@ -110,6 +110,18 @@ interface DataFileInterface
 
 
     /**
+     * @return array|null
+     */
+    public function units() : ?array;
+
+
+    /**
+     * @return array|null
+     */
+    public function processing() : ?array;
+
+
+    /**
      * @param  SettingsInterface|null  $settings
      *
      * @return SettingsInterface

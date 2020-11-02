@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Hyyppa\Toxx\Contracts\Format\FileHeaderInterface;
+use Hyyppa\Toxx\Contracts\JsonAndArrayOutput;
 use Hyyppa\Toxx\Contracts\Reading\ReadingCollectionInterface;
 use Hyyppa\Toxx\Contracts\Reading\ReadingInterface;
 use Hyyppa\Toxx\Contracts\Record\JsonableRecordInterface;
@@ -12,7 +13,7 @@ use Hyyppa\Toxx\Traits\LazyAccessor;
 use JsonSerializable;
 use const STR_PAD_LEFT;
 
-class Record implements RecordInterface, JsonSerializable, JsonableRecordInterface
+class Record implements RecordInterface, JsonSerializable, JsonableRecordInterface, JsonAndArrayOutput
 {
 
     use HasSettings, LazyAccessor, JsonableRecord;
@@ -130,6 +131,15 @@ class Record implements RecordInterface, JsonSerializable, JsonableRecordInterfa
     public function arrayWithUnits() : array
     {
         return $this->human();
+    }
+
+
+    /**
+     * @return array
+     */
+    public function arrayWithHidden() : array
+    {
+        return $this->withHidden()->array();
     }
 
 
@@ -587,5 +597,6 @@ class Record implements RecordInterface, JsonSerializable, JsonableRecordInterfa
 
         return $this;
     }
+
 
 }

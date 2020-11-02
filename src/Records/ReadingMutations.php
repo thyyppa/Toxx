@@ -57,6 +57,20 @@ trait ReadingMutations
     }
 
 
+    protected function unitMutation($value) : ?string
+    {
+        switch ($this->originalUnit()) {
+            case('TS'):
+            case('RN'):
+            case('NANOSECONDS'):
+            case('SECONDS'):
+                return '';
+            default:
+                return $value;
+        }
+    }
+
+
     /**
      * @param $value
      *

@@ -139,8 +139,8 @@ class CsiXml extends BaseDataFile
      */
     public function read(int $count = 1) : RecordCollectionInterface
     {
-        if ($this->_current + $count > $this->count()) {
-            $count = $this->count() - $count;
+        if (($this->_current + $count) > $this->count()) {
+            return $this->last($count);
         }
 
         $readings = CsiXmlReader::readFromOffset($this->_filename, $this->_current, $count);
@@ -182,7 +182,7 @@ class CsiXml extends BaseDataFile
      */
     public function last(int $count = 1)
     {
-        $this->seekFrame($this->count() - $count + 1);
+        $this->seekFrame($this->count() - $count);
 
         if ($count === 1) {
             return $this->read()->first();
