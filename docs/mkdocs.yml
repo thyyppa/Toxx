@@ -1,0 +1,63 @@
+site_name: Toxx Reader
+#site_url: null
+repo_url: "https://github.com/thyyppa/toxx/"
+site_description: "A package for reading Campbell Scientific Toa5, Toaci1, Tob1, CsiXml, CSV, and ASCII data files."
+site_author: "Travis Hyyppä"
+
+markdown_extensions:
+  - footnotes
+  - meta
+  - codehilite:
+      linenums: false
+  - toc
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: "docs/snippets"
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+theme:
+  name: material
+  feature:
+    tabs: true
+#  features:
+#    - instant
+#  font:
+#    text: Ubuntu
+#    code: Ubuntu Mono
+  highlightjs: true
+  hljs_style: github
+  hljs_languages:
+    - php
+    - json
+    - bash
+  include_homepage_in_sidebar: true
+
+plugins:
+  - search
+  - awesome-pages
+  - git-revision-date-localized
+  - sequence-js:
+      theme: simple #hand
+      popup: false
+  - build_plantuml:
+      render: "server" # or "local" for local rendering
+      bin_path: "/usr/local/bin/plantuml" # ignored when render: server
+      server: "http://www.plantuml.com/plantuml" # offical plantuml server
+      output_format: "svg" # or "png"
+      diagram_root: "docs/diagrams" # should reside under docs_dir
+      output_folder: "out"
+      input_folder: "src"
+  - minify:
+      minify_html: false
+
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/thyyppa'
+
+extra_css:
+  - "./assets/css/tables.css"
