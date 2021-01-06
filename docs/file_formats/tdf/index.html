@@ -1,0 +1,775 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A package for reading Campbell Scientific Toa5, Toaci1, Tob1, CsiXml, CSV, and ASCII data files.">
+      
+      
+        <link rel="canonical" href="https://toxx.github.com/file_formats/tdf/">
+      
+      
+        <meta name="author" content="Travis Hyyppä">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>TDF - Toxx Reader</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#tdf" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://toxx.github.com/" title="Toxx Reader" aria-label="Toxx Reader" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Toxx Reader
+            </span>
+            <span class="md-header-nav__topic">
+              
+                TDF
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/thyyppa/toxx/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Toxx Reader
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../toa5/" class="md-tabs__link md-tabs__link--active">
+          File formats
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://toxx.github.com/" title="Toxx Reader" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Toxx Reader
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/thyyppa/toxx/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Toxx Reader" class="md-nav__link">
+      Toxx Reader
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../readings/" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../records/" title="Records" class="md-nav__link">
+      Records
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      File formats
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        File formats
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../toa5/" title="TOA5" class="md-nav__link">
+      TOA5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tob1/" title="TOB1" class="md-nav__link">
+      TOB1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csv/" title="CSV" class="md-nav__link">
+      CSV
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../toaci1/" title="TOACI1" class="md-nav__link">
+      TOACI1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ascii/" title="Ascii" class="md-nav__link">
+      Ascii
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csixml/" title="CsiXml" class="md-nav__link">
+      CsiXml
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        TDF
+      </label>
+    
+    <a href="./" title="TDF" class="md-nav__link md-nav__link--active">
+      TDF
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    Structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field" class="md-nav__link">
+    Field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-type" class="md-nav__link">
+    Field Type
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fsl/" title="FSL" class="md-nav__link">
+      FSL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    Structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field" class="md-nav__link">
+    Field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-type" class="md-nav__link">
+    Field Type
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/thyyppa/toxx/edit/master/docs/file_formats/tdf.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="tdf">TDF</h1>
+<div class="admonition info">
+<p class="admonition-title">This page is for reference only</p>
+<p>Table Definition Files are created by LoggerNet and not modified by Toxx in any way.</p>
+</div>
+<hr />
+<p>Table Definition Files are created whenever you compile a program using CRBASIC Editor.</p>
+<p>Toxx can use these files to better understand your headerless data formats, adding
+meta data to your records so that you can use CSV and ASCII with as much information<br />
+as you would have when using TOA5 and TOB1.</p>
+<h2 id="structure">Structure</h2>
+<div class="admonition warning">
+<p>This information was gathered by observation and may be incorrect.</p>
+</div>
+<p>The TDF file is a simple binary that begins with a single byte <code class="codehilite"><span class="err">0x01</span></code>, which is presumably the version number, followed by a null terminated list of <code class="codehilite"><span class="err">table</span></code> structures.</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    byte version,           // usually 0x01</span>
+<span class="err">    TABLE tables[]          // null terminated</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3 id="table">Table</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    string field_name,      // null terminated</span>
+<span class="err">    uint32 size,            // table size</span>
+<span class="err">    FIELD_TYPE time_type,   // data type used for timestamps (usually 0x0E for 8-byte NSEC)</span>
+<span class="err">    NSEC start_time,        // time that collection began, usually 0 (1990-01-01)</span>
+<span class="err">    NSEC interval,          // table collection interval</span>
+<span class="err">    FIELD fields[],         // list of fields (4-byte zero terminated?)</span>
+<span class="err">    byte null               // null</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3 id="field">Field</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    FIELD_TYPE type,        // the first bit indicates read-only, the next 7 indicate field type</span>
+<span class="err">    string name,            // null terminated</span>
+<span class="err">    string alias,           // null terminated</span>
+<span class="err">    string processing,      // null terminated</span>
+<span class="err">    string unit,            // null terminated</span>
+<span class="err">    string description,     // null terminated</span>
+<span class="err">    uint32 start_index,     // dimension start index, usually 1 (?)</span>
+<span class="err">    uint32 size,            // total length of all dimensions, typically 1 for simple readings</span>
+<span class="err">    uint32 dimension[]      // zero terminated - if size is 1 this is just a single uint32 of 0</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3 id="field-type">Field Type</h3>
+<div class="admonition warning">
+<p>These are best-guesses, and many are unused</p>
+<p>See <a href="https://s.campbellsci.com/documents/us/manuals/loggernet-and-lnserver-sdk.pdf#page=117">LoggerNet SDK Programmer's Manual 4.5 - Section 16.7.1</a>
+for more info.</p>
+</div>
+<div class="codehilite"><pre><span></span><code><span class="k">enum</span> <span class="n">byte</span> <span class="p">{</span>
+    <span class="n">UNKNOWN</span><span class="p">,</span>
+    <span class="n">UINT1</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x01</span> <span class="o">--</span> <span class="mi">1</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsigned</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">UINT2</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x02</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsigned</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">UINT4</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x03</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsigned</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">INT1</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x04</span> <span class="o">--</span> <span class="mi">1</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">INT2</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x05</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">INT4</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x06</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">FP2</span><span class="p">,</span>                    <span class="o">//</span> <span class="mh">0x07</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">final</span> <span class="n">storage</span> <span class="nb nb-Type">float</span> <span class="p">(</span><span class="n">aka</span> <span class="n">FS2</span><span class="p">)</span>
+    <span class="n">FP4</span><span class="p">,</span>                    <span class="o">//</span> <span class="mh">0x08</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">final</span> <span class="n">storage</span> <span class="nb nb-Type">float</span> <span class="p">(</span><span class="n">aka</span> <span class="n">FS4</span><span class="p">)</span>
+    <span class="n">IEEE4</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x09</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">IEEE</span> <span class="n">floating</span> <span class="n">point</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">BOOL</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x0A</span> <span class="o">--</span> <span class="mi">1</span><span class="o">-</span><span class="n">byte</span> <span class="n">boolean</span>
+    <span class="n">ASCII</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x0B</span> <span class="o">--</span> <span class="n">n</span><span class="o">-</span><span class="n">byte</span> <span class="n">fixed</span> <span class="n">length</span> <span class="n">string</span>
+    <span class="n">SEC</span><span class="p">,</span>                    <span class="o">//</span> <span class="mh">0x0C</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsigned</span> <span class="nb nb-Type">int</span> <span class="n">storing</span> <span class="n">seconds</span> <span class="n">since</span> <span class="mi">1990</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
+    <span class="n">USEC</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x0D</span> <span class="o">--</span> <span class="mi">6</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsigned</span> <span class="nb nb-Type">int</span> <span class="n">storing</span> <span class="mi">10</span><span class="n">s</span> <span class="n">of</span> <span class="n">microseconds</span> <span class="n">since</span> <span class="mi">1990</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
+    <span class="n">NSEC</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x0E</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span><span class="p">,</span> <span class="mi">4</span><span class="o">-</span><span class="n">bytes</span> <span class="k">for</span> <span class="n">sec</span> <span class="n">since</span> <span class="mi">1990</span> <span class="o">+</span> <span class="mi">4</span><span class="o">-</span><span class="n">bytes</span> <span class="k">for</span> <span class="n">additional</span> <span class="n">nanoseconds</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">FP3</span><span class="p">,</span>                    <span class="o">//</span> <span class="mh">0x0F</span> <span class="o">--</span> <span class="mi">3</span><span class="o">-</span><span class="n">byte</span> <span class="n">final</span> <span class="n">storage</span> <span class="nb nb-Type">float</span> <span class="p">(</span><span class="n">aka</span> <span class="n">FS3</span><span class="p">)</span>
+    <span class="n">ASCIIZ</span><span class="p">,</span>                 <span class="o">//</span> <span class="mh">0x10</span> <span class="o">--</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">byte</span> <span class="nb nb-Type">null</span> <span class="n">terminated</span> <span class="n">variable</span> <span class="n">length</span> <span class="n">string</span>
+    <span class="n">BOOL8</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x11</span> <span class="o">--</span> <span class="mi">1</span><span class="o">-</span><span class="n">byte</span> <span class="n">bit</span> <span class="n">field</span>
+    <span class="n">IEEE8</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x12</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">IEEE</span> <span class="n">floating</span> <span class="n">point</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">INT2_LSF</span><span class="p">,</span>               <span class="o">//</span> <span class="mh">0x13</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">INT4_LSF</span><span class="p">,</span>               <span class="o">//</span> <span class="mh">0x14</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">singed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">INT2_LSF2</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x15</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">singed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span> <span class="p">(</span><span class="n">duplicate</span><span class="err">?</span><span class="p">)</span>
+    <span class="n">UINT4_LSF</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x16</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">unsinged</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">NSEC_LSF</span><span class="p">,</span>               <span class="o">//</span> <span class="mh">0x17</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span><span class="p">,</span> <span class="n">same</span> <span class="k">as</span> <span class="n">NSEC</span> <span class="n">but</span> <span class="n">little</span> <span class="n">endian</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">IEEE4_LSF</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x18</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">IEEE</span> <span class="n">floating</span> <span class="n">point</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">IEEE8_LSF</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x19</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">IEEE</span> <span class="n">floating</span> <span class="n">point</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">FS4</span><span class="p">,</span>                    <span class="o">//</span> <span class="mh">0x1A</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">floating</span> <span class="n">point</span> <span class="p">(</span><span class="n">aka</span> <span class="n">FS4</span><span class="p">)</span>
+    <span class="n">BOOL2</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x1B</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">boolean</span><span class="p">,</span> <span class="n">though</span> <span class="n">one</span> <span class="n">source</span> <span class="n">says</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">storage</span> <span class="k">for</span> <span class="n">either</span> <span class="n">FP2</span> <span class="ow">or</span> <span class="n">FP3</span>
+    <span class="n">BOOL4</span><span class="p">,</span>                  <span class="o">//</span> <span class="mh">0x1C</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">boolean</span><span class="p">,</span> <span class="n">though</span> <span class="n">one</span> <span class="n">source</span> <span class="n">says</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">of</span> <span class="n">nanoseconds</span> <span class="n">since</span> <span class="mi">1990</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+    <span class="n">LGRDATE</span><span class="p">,</span>                <span class="o">//</span> <span class="mh">0x1D</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">of</span> <span class="n">nanoseconds</span> <span class="n">since</span> <span class="mi">1990</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">BOOL2_LSF</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x1E</span> <span class="o">--</span> <span class="mi">2</span><span class="o">-</span><span class="n">byte</span> <span class="n">boolean</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="o">=</span> <span class="bp">true</span>
+    <span class="n">BOOL4_LSF</span><span class="p">,</span>              <span class="o">//</span> <span class="mh">0x1F</span> <span class="o">--</span> <span class="mi">4</span><span class="o">-</span><span class="n">byte</span> <span class="n">boolean</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="o">=</span> <span class="bp">true</span>
+    <span class="n">INT8</span><span class="p">,</span>                   <span class="o">//</span> <span class="mh">0x20</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">BE</span><span class="p">)</span>
+    <span class="n">INT8_LSF</span>                <span class="o">//</span> <span class="mh">0x21</span> <span class="o">--</span> <span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">signed</span> <span class="nb nb-Type">int</span> <span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<div class="admonition info">
+<ul>
+<li><a href="https://s.campbellsci.com/documents/us/manuals/loggernet-and-lnserver-sdk.pdf">LoggerNet SDK Programmer's Manual 4.5</a></li>
+<li><a href="https://s.campbellsci.com/documents/us/manuals/loggernet.pdf">Loggernet Product Manual 4.6</a></li>
+<li><a href="https://github.com/kitplummer/PyPak">https://github.com/kitplummer/PyPak</a></li>
+<li><a href="https://github.com/sutanay/PbCdlComm">https://github.com/sutanay/PbCdlComm</a></li>
+</ul>
+</div>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        Last update: January 6, 2021
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../csixml/" title="CsiXml" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                CsiXml
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../fsl/" title="FSL" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                FSL
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/thyyppa" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
