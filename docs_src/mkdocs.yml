@@ -3,7 +3,7 @@ site_url: "https://toxx.github.com/"
 repo_url: "https://github.com/thyyppa/toxx/"
 site_description: "A package for reading Campbell Scientific Toa5, Toaci1, Tob1, CsiXml, CSV, and ASCII data files."
 site_author: "Travis Hyyppä"
-site_dir: "../site"
+site_dir: "../docs"
 
 markdown_extensions:
   - footnotes
