@@ -42,7 +42,7 @@ For best results the output files should be configured as described below. Most 
 are the default. Open up LoggerNet and you should see the big blue main screen. Navigate to `Main->Setup`
 and you should see the Setup Screen.
 
-![](/assets/img/main.png)
+![](./assets/img/main.png)
 
 ### LoggerNet Configuration
 
@@ -56,7 +56,7 @@ After you've chosen your table click the `Data Files` tab.
 
 Set your output file name and be sure that `Included For Scheduled Collection` is checked.
 
-![](/assets/img/setup_screen.png)
+![](./assets/img/setup_screen.png)
 
 ### Choose your output file type
 
@@ -67,7 +67,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
 
     TOA5 is a comma separated format with a 4-line header containing metadata about the datalogger and the readings.
     
-    ![](/assets/img/example_toa5.png)
+    ![](./assets/img/example_toa5.png)
 
     !!! alert "Output File Options"
         * [x] Include Timestamp
@@ -83,7 +83,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
     If you will only be reading this file with LoggerNet and Toxx, and have no need to
     read the file in plaintext, this is by far the fastest and most efficient format.
     
-    ![](/assets/img/example_tob1.png)
+    ![](./assets/img/example_tob1.png)
     
     !!! alert "Output File Options"
         * [x] Include Timestamp
@@ -97,7 +97,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
     
     There are no output file options that need to be set.
     
-    ![](/assets/img/example_toaci1.png)
+    ![](./assets/img/example_toaci1.png)
 
 
 ??? info "CSV"
@@ -113,7 +113,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
     
         They are automatically prepended. You should **only pass the field names defined in your DataTable**.
     
-    ![](/assets/img/example_csv.png)
+    ![](./assets/img/example_csv.png)
     
     !!! alert "Output File Options"
         * [x] Year
@@ -125,7 +125,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
         * [x] Array Datalogger Format - set to **[ Hour/Minutes and Seconds ]**
 
 
-??? warning "ASCII - This format is sketchyzz"
+??? warning "ASCII - This format is sketchy"
     The format defined in the LoggerNet documentation does not match what is output by LoggerNet.
 
     This section documents what is output by LoggerNet, but due to the discrepency **this format is not recommended**.
@@ -145,7 +145,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
         
         See [Usage](#usage) below for example.
     
-    ![](/assets/img/example_ascii.png)
+    ![](./assets/img/example_ascii.png)
     
     !!! alert "Output File Options"
         * [x] Include Timestamp
@@ -162,7 +162,7 @@ Set your output file name and be sure that `Included For Scheduled Collection` i
     ---
     #### CSIXML
 
-    ![](/assets/img/example_xml.png)
+    ![](./assets/img/example_xml.png)
     
     !!! alert "Output File Options"
         * [x] Include Timestamp
