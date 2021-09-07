@@ -10,8 +10,8 @@
         }
     ],
     "require":     {
-        "php":                    "^7.2",
-        "ext-xmlreader":          "^7.2",
+        "php":                    "^7.2|8",
+        "ext-xmlreader":          "^7.2|8",
         "symfony/polyfill-iconv": "^1.15",
         "tightenco/collect":      "^7.3",
         "nesbot/carbon":          "^2.32",
