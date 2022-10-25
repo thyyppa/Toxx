@@ -10,15 +10,15 @@
         }
     ],
     "require":     {
-        "php":                    "^7.2|^8",
-        "ext-xmlreader":          "^7.2|^8",
-        "symfony/polyfill-iconv": "^1.15",
-        "tightenco/collect":      "^7.3",
-        "nesbot/carbon":          "^2.32",
-        "jawira/case-converter":  "^3.4"
+        "php":                    ">=7.2",
+        "ext-xmlreader":          ">=7.2",
+        "symfony/polyfill-iconv": "1.15",
+        "tightenco/collect":      ">=7.3",
+        "nesbot/carbon":          ">=2.32",
+        "jawira/case-converter":  ">=3.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": ">=9.4"
     },
     "autoload":    {
         "psr-4": {
